@@ -126,3 +126,26 @@ noteForm.addEventListener("submit", (e) => {
         noteForm.innerHTML = `<p class="card-text">${messageInputValue}</p>`;
     }
 });
+
+
+const premiera = document.querySelector('#premiera');
+premiera.innerHTML = null;
+
+filmy.forEach((film) => {
+    const datum = film.premiera;
+    const formattedDate = dayjs(datum).format('DD.MM.YYYY');
+    
+	const ZaKdy = dayjs(datum).diff(dayjs(), 'days') + 1;
+
+	let formattedDay = '';
+	if (ZaKdy === 1) {
+		formattedDay = 'den'
+	} else if (ZaKdy > 1 && ZaKdy < 5) {
+		formattedDay = 'dny'
+	} else {
+		formattedDay = 'dní'
+	}
+
+	premiera.innerHTML = `<strong> Premiéra ${formattedDate}, což je za ${ZaKdy} ${formattedDay}. </strong>`;
+});
+
