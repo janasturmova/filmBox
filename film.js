@@ -111,7 +111,6 @@ noteForm.addEventListener("submit", (e) => {
 
     const messageInput = document.querySelector('#message-input');
     const messageInputValue = messageInput.value;
-
     const termCheckbox = document.querySelector('#terms-checkbox');
 
     if (messageInputValue === '') {
@@ -128,6 +127,8 @@ noteForm.addEventListener("submit", (e) => {
 });
 
 
+
+
 const premiera = document.querySelector('#premiera');
 premiera.innerHTML = null;
 
@@ -139,13 +140,55 @@ filmy.forEach((film) => {
 
 	let formattedDay = '';
 	if (ZaKdy === 1) {
-		formattedDay = 'den'
+		formattedDay = 'den';
 	} else if (ZaKdy > 1 && ZaKdy < 5) {
-		formattedDay = 'dny'
+		formattedDay = 'dny';
 	} else {
-		formattedDay = 'dní'
+		formattedDay = 'dní';
 	}
 
 	premiera.innerHTML = `<strong> Premiéra ${formattedDate}, což je za ${ZaKdy} ${formattedDay}. </strong>`;
 });
 
+const starFull = (number) => {
+	const stars = document.querySelectorAll('.fa-star');
+	stars.forEach((star, index) => {
+		if (index + 1 <= number) {
+			star.classList.remove('far');
+			star.classList.add('fas');
+		} else {
+			star.classList.remove('fas');
+			star.classList.add('far');
+		}
+	})
+};
+
+let where = null
+const stars = document.querySelectorAll('.fa-star');
+
+stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+        const numberStar = index + 1;
+        starFull(numberStar);
+		where = numberStar
+    });
+});
+
+
+stars.forEach((star, index) => {
+    star.addEventListener('mouseenter', () => {
+        const numberStar = index + 1;
+        starFull(numberStar);
+    });
+});
+
+stars.forEach((star) => {
+    star.addEventListener('mouseleave', () => {
+		starFull(where)
+    });
+});
+
+
+
+
+   
